@@ -7,7 +7,7 @@ const input = require('readline-sync');
 let candidateName;
 candidateName = "";
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
- let question = "Who was the first American woman in space? "
+ let question = "Who was the first American woman in space? ";
  let correctAnswer = "Sally Ride";
  let candidateAnswer = ("");
 
@@ -22,7 +22,7 @@ let candidateAnswers = [];
 
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
- candidateName = input.question("What is your name?\n")
+ candidateName = input.question("Candidate name: ");
   
 }
 
@@ -32,28 +32,43 @@ function askQuestion() {
 
 for (let i = 0; i < questions.length; i++) {
 
-  candidateAnswers.push(input.question(questions[i]))//method chain for case insensitive
+  candidateAnswers.push(input.question(questions[i]));
+  console.log(`Correct answer: ${correctAnswers[i]}`);
+  console.log(`Your answer: ${candidateAnswers[i]}`);
+
   
  }
 return candidateAnswers
 
 }
 
+// else {
+//   console.log("Correct")
+//   answeredCorrectly.push(candidateAnswers[i])
+ 
+// }
+
 function gradeQuiz(candidateAnswers) {
   let answeredCorrectly = [];
 for (let i = 0; i < correctAnswers.length; i++) {
-  if (correctAnswers[i] !== candidateAnswers[i]) {
-    console.log("InCorrect")
-  } else {
-    console.log("Correct")
-    answeredCorrectly.push(candidateAnswers[i])
-   
-  }
+  if (correctAnswers[i].toUpperCase() === candidateAnswers[i].toUpperCase()) {
+    
+    answeredCorrectly.push(candidateAnswers[i]);
+  } 
+
+  
 }
  
 
-  let grade = (answeredCorrectly.length/questions.length * 100);  //TODO 3.2 use this variable to calculate the candidates score.
- console.log(grade)
+  let grade = (answeredCorrectly.length/questions.length * 100); //TODO 3.2 use this variable to calculate the candidates score.
+  console.log(`>>> Overall grade : ${grade}% (${answeredCorrectly.length} out of ${questions.length} answered correctly.) <<<`);
+  if (grade < 80){
+    console.log(">>> Status: Failed <<<");
+  }
+  else {
+    console.log(">>> Status: Passed <<<");
+  }
+ 
 
   return grade;
 }
